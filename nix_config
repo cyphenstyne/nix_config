@@ -1,0 +1,183 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  # Bootloader:
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    #useOSProber = true; # Optional, detects other OSes
+  };
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use latest kernel:
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users."cyphenstyne" = {
+    isNormalUser = true;
+    description = "cyphenstyne";
+    extraGroups = [ "networkmanager" "wheel" ];
+    # List packages that should be installed for this user:
+    packages = with pkgs; [
+      netbeans
+      chromium
+      zed-editor
+      tmux
+      easyeffects
+      alsa-utils 
+    ];
+  };
+  
+  # Allow unfree packages:
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages that should be installed systemwide. To search, run: nix search THE_PACKAGE
+  environment.systemPackages = with pkgs; [
+    neovim
+    ghostty
+    wget
+    tree
+    git
+    fastfetch
+    btop
+    fzf
+    nerd-fonts.jetbrains-mono
+    easyeffects
+    alsa-utils
+    pciutils
+  ];
+
+  # Exclude packages from KDE packages:
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    elisa
+    konsole
+    qrca
+    kate
+  ];
+  
+  # Exclude packages from xserver packages:
+  services.xserver.excludePackages = with pkgs; [
+    xterm
+  ];
+
+  # Hostname:
+  networking.hostName = "Demona"; 
+
+  # Enable networking:
+  networking.networkmanager.enable = true;
+  
+  # Custom DNS:
+  networking.nameservers = [
+    "1.1.1.1"                  # Cloudflare IPv4 (primary)
+    "1.0.0.1"                  # Cloudflare IPv4 (secondary)
+    "2606:4700:4700::1111"     # Cloudflare IPv6
+    "2606:4700:4700::1001"     # Cloudflare IPv6
+    "8.8.8.8"                  # Google IPv4 (fallback)
+    "8.8.4.4"                  # Google IPv4 (fallback)
+    "2001:4860:4860::8888"     # Google IPv6 (fallback)
+    "2001:4860:4860::8844"     # Google IPv6 (fallback)
+  ];
+
+  # Set your time zone.
+  time.timeZone = "Asia/Kolkata";
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+  
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_IN";
+    LC_MONETARY = "en_IN";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_IN";
+    LC_TELEPHONE = "en_IN";
+    LC_TIME = "en_GB.UTF-8";
+  };
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # Starts ssh agent:
+  programs.ssh.startAgent = true;
+  
+  # List services that you want to enable:
+    
+    # Enable the KDE Plasma Desktop Environment:
+    services.displayManager.plasma-login-manager.enable = true;
+    services.desktopManager.plasma6.enable = true;
+
+    # Enable CUPS to print documents:
+    services.printing.enable = true;
+
+    # Enable sound with pipewire:
+    services.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    
+    # Enable flatpak:
+    services.flatpak.enable = true;
+
+  # Nvidia Graphics stuff:
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      amdgpuBusId = "PCI:04:00:0"; # replace with your actual ID
+      nvidiaBusId = "PCI:01:00:0"; # replace with your actual ID
+    };
+  };
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "26.05"; # Did you read the comment?
+
+}
