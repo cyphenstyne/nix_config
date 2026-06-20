@@ -23,7 +23,7 @@
   users.users."cyphenstyne" = {
     isNormalUser = true;
     description = "cyphenstyne";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
     # List packages that should be installed for this user:
     packages = with pkgs; [
       netbeans
@@ -32,6 +32,11 @@
       tmux
       easyeffects
       alsa-utils 
+      libreoffice-fresh
+      krita
+      distrobox
+      kdePackages.kclock
+      kdePackages.kcalc
     ];
   };
   
@@ -41,17 +46,18 @@
   # List packages that should be installed systemwide. To search, run: nix search THE_PACKAGE
   environment.systemPackages = with pkgs; [
     neovim
+    nano
     ghostty
     wget
+    curl
     tree
     git
     fastfetch
     btop
     fzf
     nerd-fonts.jetbrains-mono
-    easyeffects
-    alsa-utils
     pciutils
+    vlc
   ];
 
   # Exclude packages from KDE packages:
@@ -61,6 +67,15 @@
     qrca
     kate
   ];
+
+  # Docker:
+  virtualisation.docker.enable = true;
+
+  # Podman:
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
   
   # Exclude packages from xserver packages:
   services.xserver.excludePackages = with pkgs; [
@@ -125,6 +140,24 @@
 
     # Enable CUPS to print documents:
     services.printing.enable = true;
+
+    # Virtualization:
+    virtualisation.libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [(pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd];
+        };
+      };
+    };
+    programs.virt-manager.enable = true;
 
     # Enable sound with pipewire:
     services.pulseaudio.enable = false;
