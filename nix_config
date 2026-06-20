@@ -24,6 +24,7 @@
     isNormalUser = true;
     description = "cyphenstyne";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+    shell = pkgs.fish;
     # List packages that should be installed for this user:
     packages = with pkgs; [
       netbeans
@@ -67,6 +68,9 @@
     qrca
     kate
   ];
+
+  # fish shell:
+  programs.fish.enable = true;
 
   # Docker:
   virtualisation.docker.enable = true;
