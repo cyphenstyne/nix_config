@@ -12,6 +12,7 @@
     enable = true;
     efiSupport = true;
     device = "nodev";
+    efiSysMountPoint = "/boot";
     #useOSProber = true; # Optional, detects other OSes
   };
   boot.loader.efi.canTouchEfiVariables = true;
@@ -202,6 +203,10 @@
       nvidiaBusId = "PCI:01:00:0"; # replace with your actual ID
     };
   };
+
+  # Btrfs:
+  services.btrfs.autoScrub.enable = true;
+  services.fstrim.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
