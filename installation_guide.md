@@ -27,6 +27,6 @@
 #### Generate Hardware Configurations:
 - sudo nixos-generate-config --root /mnt
 
-#### Open /etc/nixos/configuration.nix and replace it with your custom config.
+#### Open /etc/nixos/configuration.nix and replace it with your custom config, then run:
 - sudo nixos-install
 - reboot
