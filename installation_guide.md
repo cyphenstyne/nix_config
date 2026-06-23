@@ -28,5 +28,5 @@
 - sudo nixos-generate-config --root /mnt
 
 #### Open /etc/nixos/configuration.nix and replace it with your custom config.
-sudo nixos-install
-reboot
+- sudo nixos-install
+- reboot
