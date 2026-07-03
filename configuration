@@ -177,17 +177,21 @@
     # Enable flatpak:
     services.flatpak.enable = true;
 
-  # Nvidia Graphics stuff:
+  # Enable OpenGL:
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # Nvidia Graphics stuff:
+  services.xserver.videoDrivers = [ 
+    "nvidia"
+    "modesetting"  
+  ];
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable; # check out "https://nixos.wiki/wiki/Nvidia" for options
     powerManagement.enable = false;
@@ -198,8 +202,8 @@
         enable = true;
         enableOffloadCmd = true;
       };
-      amdgpuBusId = "PCI:04:00:0"; # replace with your actual ID
-      nvidiaBusId = "PCI:01:00:0"; # replace with your actual ID
+      amdgpuBusId = "PCI:04:00.0"; # replace with your actual ID, btw these ARE my actual bus id
+      nvidiaBusId = "PCI:01:00.0"; # replace with your actual ID, btw these ARE my actual bus id
     };
   };
 
@@ -213,12 +217,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "26.05"; # Did you read the comment?
+  system.stateVersion = "26.05";
 
 }
