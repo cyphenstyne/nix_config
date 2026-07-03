@@ -18,7 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel:
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages; # add "_latest" to use stable kernel
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."cyphenstyne" = {
@@ -189,10 +189,9 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable; # check out "https://nixos.wiki/wiki/Nvidia" for options
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
 
     prime = {
       offload = {
