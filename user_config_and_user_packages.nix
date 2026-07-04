@@ -19,9 +19,16 @@
       distrobox
       kdePackages.kclock
       kdePackages.kcalc
+      kdePackages.plasma-browser-integration
     ];
   };
 
   # fish shell:
   programs.fish.enable = true;
+
+  programs.chromium = {
+    enable = true;
+    enablePlasmaBrowserIntegration = true; # Links the native messaging host
+  };
+
 }
