@@ -15,7 +15,7 @@
       ./timezone_config.nix
       ./bluetooth_config.nix
       ./opengl_config.nix
-      ./necessary_services.nix
+      ./services.nix
       ./virtualization_config.nix
       ./font_config.nix
     ];
