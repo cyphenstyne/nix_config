@@ -16,7 +16,6 @@
     btop
     fzf
     pciutils
-    kdePackages.plasma-browser-integration
     lshw
     vlc
   ];
