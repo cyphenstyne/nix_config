@@ -22,8 +22,4 @@
 
   # Enable flatpak:
   services.flatpak.enable = true;
-
-  # Btrfs:
-  services.btrfs.autoScrub.enable = true;
-  services.fstrim.enable = true;
 }
