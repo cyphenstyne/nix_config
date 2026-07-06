@@ -8,11 +8,12 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable; # check out "https://nixos.wiki/wiki/Nvidia" for options
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = true;
+    nvidiaPersistenced = true;
 
     prime = {
       offload = {
