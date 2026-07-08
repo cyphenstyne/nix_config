@@ -17,6 +17,7 @@
       libreoffice-fresh
       krita
       distrobox
+      chafa
       kdePackages.kclock
       kdePackages.kcalc
       kdePackages.plasma-browser-integration
