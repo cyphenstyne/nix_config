@@ -18,9 +18,6 @@
       krita
       distrobox
       chafa
-      kdePackages.kclock
-      kdePackages.kcalc
-      kdePackages.plasma-browser-integration
     ];
   };
 
@@ -29,7 +26,8 @@
 
   programs.chromium = {
     enable = true;
-    enablePlasmaBrowserIntegration = true; # Links the native messaging host
+    enablePlasmaBrowserIntegration = true; # remove this in gnome
   };
-
 }
+
+

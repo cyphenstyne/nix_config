@@ -16,20 +16,12 @@
     btop
     fzf
     pciutils
-    lshw
     vlc
+    lshw
   ];
 
   # Exclude packages from xserver packages:
   services.xserver.excludePackages = with pkgs; [
     xterm
-  ];
-
-  # Exclude packages from KDE packages:
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    elisa
-    konsole
-    qrca
-    kate
   ];
 }
