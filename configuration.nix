@@ -18,7 +18,8 @@
       ./services.nix
       ./virtualization_config.nix
       ./font_config.nix
-      ./kde_stuff.nix
+      #./kde_stuff.nix
+      ./gnome_stuff.nix
     ];
 
   system.stateVersion = "26.05";

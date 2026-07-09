@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 {
-  # Starts ssh agent:
-  programs.ssh.startAgent = true;
+  # Starts ssh agent: remove this if using gnome
+  #programs.ssh.startAgent = true;
 
   # Enable the KDE Plasma Desktop Environment:
-  services.displayManager.plasma-login-manager.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.displayManager.plasma-login-manager.enable = true;
+  #services.desktopManager.plasma6.enable = true;
+
+  # Enable the GNOME Desktop Environment:
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Enable CUPS to print documents:
   services.printing.enable = true;

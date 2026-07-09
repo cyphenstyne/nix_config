@@ -26,7 +26,7 @@
 
   programs.chromium = {
     enable = true;
-    enablePlasmaBrowserIntegration = true; # remove this in gnome
+    #enablePlasmaBrowserIntegration = true; # remove this in gnome
   };
 }
 
