@@ -5,7 +5,6 @@
 
   # Enable networking:
   networking.networkmanager.enable = true;
-  networking.networkmanager.enable = true;
 
   # Some network settings:
   networking.enableIPv6 = false;
