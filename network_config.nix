@@ -5,6 +5,11 @@
 
   # Enable networking:
   networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
+
+  # Some network settings:
+  networking.enableIPv6 = false;
+  networking.networkmanager.dns = "none";
 
   # Custom DNS:
   networking.nameservers = [
