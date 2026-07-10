@@ -4,8 +4,11 @@
   environment.systemPackages = with pkgs; [
     gnome-tweaks
     dconf-editor
-    gnomeExtensions.appindicator
     gnomeExtensions.easyeffects-preset-selector
+    gnomeExtensions.user-themes
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.color-picker
   ];
 
   environment.gnome.excludePackages = with pkgs; [
