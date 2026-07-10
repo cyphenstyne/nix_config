@@ -3,6 +3,9 @@
   # System Packages:
   environment.systemPackages = with pkgs; [
     gnome-tweaks
+    dconf-editor
+    gnomeExtensions.appindicator
+    gnomeExtensions.easyeffects-preset-selector
   ];
 
   environment.gnome.excludePackages = with pkgs; [
