@@ -18,6 +18,7 @@
       krita
       distrobox
       chafa
+      qbittorrent
     ];
   };
 
