@@ -14,5 +14,5 @@
   };
   
   # Use latest kernel:
-  boot.kernelPackages = pkgs.linuxPackages; # add "_latest" to use stable kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest; # add "_latest" to use stable kernel
 }
