@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Define a user account. Don't forget to set a password with $passwd.
   users.users."cyphenstyne" = {
@@ -27,8 +27,18 @@
 
   programs.chromium = {
     enable = true;
-    #enablePlasmaBrowserIntegration = true; # remove this in gnome
+    enablePlasmaBrowserIntegration = true; # disable in gnome, enable in kde
   };
+
+  # Steam:
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-unwrapped"
+  ];
 }
-
-
