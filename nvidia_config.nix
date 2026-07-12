@@ -10,7 +10,7 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable; # check out "https://nixos.wiki/wiki/Nvidia" for options
+    package = config.boot.kernelPackages.nvidiaPackages.production; # check out "https://nixos.wiki/wiki/Nvidia" for options
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     nvidiaPersistenced = true;
@@ -24,4 +24,6 @@
       nvidiaBusId = "PCI:1:0:0"; # replace with your actual ID, btw these ARE my actual bus id
     };
   };
+
+  systemd.services.nvidia-persistenced.serviceConfig.TimeoutStopSec = "5s";
 }
