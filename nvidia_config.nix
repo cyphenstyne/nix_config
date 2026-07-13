@@ -8,7 +8,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production; # check out "https://nixos.wiki/wiki/Nvidia" for options
     powerManagement.enable = true;
