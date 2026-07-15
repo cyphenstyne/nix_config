@@ -22,9 +22,18 @@
     ];
   };
 
+  # Programs:
+
+  # Starts ssh agent: disable if using gnome, if using kde enable
+  programs.ssh.startAgent = true;
+
+  # Game mode:
+  programs.gamemode.enable = true;
+
   # fish shell:
   programs.fish.enable = true;
 
+  # Chromium:
   programs.chromium = {
     enable = true;
     enablePlasmaBrowserIntegration = true; # disable in gnome, enable in kde
