@@ -9,7 +9,6 @@
     # List packages that should be installed for this user:
     packages = with pkgs; [
       netbeans
-      chromium
       zed-editor
       tmux
       easyeffects
