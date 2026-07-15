@@ -1,11 +1,5 @@
 { config, pkgs, ... }:
 {
-  # Starts ssh agent: disable if using gnome, if using kde enable
-  programs.ssh.startAgent = true;
-
-  # Game mode:
-  programs.gamemode.enable = true;
-
   # Enable the KDE Plasma Desktop Environment:
   services.displayManager.plasma-login-manager.enable = true;
   services.desktopManager.plasma6.enable = true;
