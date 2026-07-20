@@ -15,11 +15,11 @@
       ./timezone_config.nix
       ./bluetooth_config.nix
       ./opengl_config.nix
-      ./services_and_programs.nix
+      ./services.nix
       ./virtualization_config.nix
       ./font_config.nix
-      #./kde_stuff.nix
-      ./gnome_stuff.nix
+      ./kde_stuff.nix
+      #./gnome_stuff.nix
     ];
 
   system.stateVersion = "26.05";
